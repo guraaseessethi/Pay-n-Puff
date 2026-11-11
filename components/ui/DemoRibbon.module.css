@@ -1,0 +1,10 @@
+.ribbon {
+  background: var(--amber);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-align: center;
+  padding: 4px 12px;
+}
