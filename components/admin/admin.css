@@ -1,0 +1,331 @@
+/* Back-office shared classes (global so small page components can share them). */
+.ah {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.ah h1 {
+  font-family: var(--board);
+  font-weight: 700;
+  font-size: 40px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.ah .sub {
+  color: var(--gray);
+  font-size: 14px;
+  margin-top: 6px;
+  max-width: 70ch;
+}
+.ah .acts {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* POS */
+.pos {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 1050px) {
+  .pos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.pick {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 8px;
+  max-height: 520px;
+  overflow: auto;
+}
+.pick button {
+  text-align: left;
+  border: 1px solid #b9b4c6;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  min-height: 56px;
+}
+.pick button b {
+  display: block;
+  font-size: 13.5px;
+}
+.pick button span {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--gray);
+}
+.pick button:hover {
+  border-color: var(--ink);
+}
+.pick button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #faf8fc;
+}
+.tkt {
+  position: sticky;
+  top: 16px;
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  padding: 18px;
+}
+.tkt .ln {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--soft);
+}
+.tkt .ln button {
+  border: 0;
+  background: none;
+  color: var(--bad);
+  cursor: pointer;
+  padding: 0 0 0 8px;
+  min-width: 24px;
+  min-height: 24px;
+}
+.tkt .tot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  padding: 3px 0;
+  color: var(--gray);
+}
+.tkt .grand {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1.5px solid var(--ink);
+  margin-top: 8px;
+  padding-top: 10px;
+  font-weight: 700;
+}
+.tkt .grand b {
+  font-family: var(--board);
+  font-size: 36px;
+}
+.idbox {
+  border: 1.5px solid var(--hot);
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+  background: #fff6fb;
+}
+.idbox h2,
+.idbox h3 {
+  font-size: 12.5px;
+  font-family: var(--mono);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hot-ink);
+}
+.idbox.ok {
+  border-color: var(--ok);
+  background: #f1faf6;
+}
+.idbox.ok h2,
+.idbox.ok h3 {
+  color: var(--ok);
+}
+.idrow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+.paygrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+/* checklist + bars */
+.chk {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--soft);
+  font-size: 14px;
+  cursor: pointer;
+}
+.chk input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--ok);
+  flex-shrink: 0;
+}
+.hb {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) 60px;
+  gap: 10px;
+  align-items: center;
+  font-size: 13.5px;
+  padding: 5px 0;
+}
+.hb .tr {
+  height: 8px;
+  background: var(--sky);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.hb .tr i {
+  display: block;
+  height: 100%;
+  background: var(--plum);
+}
+.hb .n {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+
+/* flight board */
+.fb {
+  background: var(--plum);
+  border-radius: 12px;
+  padding: 6px 16px;
+  color: #fff;
+  overflow-x: auto;
+}
+.fbr {
+  display: grid;
+  grid-template-columns: 96px minmax(150px, 1.3fr) minmax(140px, 1fr) 80px 112px 190px;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.14);
+  font-size: 14px;
+  min-width: 840px;
+}
+.fbr:last-child {
+  border-bottom: 0;
+}
+.fbr.hd {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #bfb7d0;
+}
+.fbr .code {
+  font-family: var(--board);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--amber);
+}
+.fbr small {
+  display: block;
+  color: #bfb7d0;
+  font-size: 12px;
+}
+.fbr .btn {
+  background: #fff;
+  border-color: #fff;
+  color: var(--ink);
+}
+.fbr .btn.hot {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: var(--ink);
+}
+.fbr .inp {
+  min-height: 34px;
+  padding: 5px 8px;
+  font-size: 13px;
+}
+.fb .p-ok {
+  background: #4be3a6;
+  color: var(--plum);
+}
+.fb .p-bad {
+  background: #ff8fa8;
+  color: var(--plum);
+}
+.fb .p-warn {
+  background: var(--amber);
+  color: var(--plum);
+}
+.fb .p-hot {
+  background: var(--pink);
+  color: var(--plum);
+}
+.fb .flip {
+  animation: fbflip 0.6s cubic-bezier(0.3, 0.7, 0.4, 1) both;
+  display: inline-block;
+}
+@keyframes fbflip {
+  0% {
+    transform: perspective(300px) rotateX(-90deg);
+  }
+  100% {
+    transform: perspective(300px) rotateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fb .flip {
+    animation: none;
+  }
+}
+
+.fix {
+  border-left: 3px solid var(--hot);
+  padding: 2px 0 2px 12px;
+  margin-bottom: 12px;
+}
+.fix b {
+  display: block;
+  font-size: 14.5px;
+}
+.fix span {
+  font-size: 13px;
+  color: var(--gray);
+}
+.modecard {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 10px;
+  border: 1.5px solid var(--soft);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+}
+.modecard:has(input:checked) {
+  border-color: var(--ink);
+  background: var(--sky);
+}
+.modecard input {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+.modecard b {
+  display: block;
+}
+.modecard small {
+  display: block;
+  color: var(--gray);
+  font-size: 13px;
+}
+.risk-high {
+  color: var(--bad);
+  font-weight: 700;
+}
