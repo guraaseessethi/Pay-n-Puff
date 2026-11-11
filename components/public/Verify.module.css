@@ -1,0 +1,97 @@
+.flow {
+  display: grid;
+  gap: 16px;
+}
+.panel {
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  border-radius: 14px;
+  padding: 22px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.panel h3 {
+  font-family: var(--board);
+  font-size: 26px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.panel p {
+  margin: 0;
+}
+.demoPanel {
+  border-style: dashed;
+  border-color: var(--warn);
+  background: #fffaf0;
+}
+.demoLabel {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: #7a4c06;
+  background: #fff4dc;
+  border: 1px dashed var(--warn);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.stepper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.stepper li {
+  border: 1px solid var(--soft);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13.5px;
+  color: var(--gray);
+}
+.stepper b {
+  font-family: var(--mono);
+  color: var(--hot-ink);
+  margin-right: 4px;
+}
+.curStep {
+  border-color: var(--ink) !important;
+  color: var(--ink) !important;
+  font-weight: 700;
+}
+.doneStep {
+  background: #f1faf6;
+  border-color: var(--ok) !important;
+}
+.frame {
+  border: 2px dashed var(--cyan-d);
+  background: var(--sky);
+  border-radius: 12px;
+  aspect-ratio: 1.6;
+  max-width: 320px;
+  display: grid;
+  place-items: center;
+  color: var(--cyan-ink);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.round {
+  aspect-ratio: 1;
+  max-width: 180px;
+  border-radius: 50%;
+}
+.cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stepper {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
