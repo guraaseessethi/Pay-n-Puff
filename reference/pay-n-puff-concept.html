@@ -1,0 +1,765 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Pay N' Puff Vapes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chewy&family=Barlow+Condensed:wght@500;600;700&family=Figtree:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Pay N' Puff: their real logo colours (hot pink, sky cyan, magenta lettering, white plane on a dashed flight path).
+   The cartoon lettering stays inside the logo. Everything else is an airport departures board, because the brand
+   is "We'll Fly to You!" and the store is open till 1 AM. Light mode by choice. */
+:root{
+  --sky:#eaf7fc;
+  --paper:#ffffff;
+  --cloud:#f5fbfe;
+  --ink:#231a33;
+  --plum:#2d2142;
+  --gray:#5f5a6e;
+  --soft:#e3e0ea;
+  --pink:#f78fcf;
+  --hot:#e8429f;
+  --magenta:#c414b0;
+  --cyan:#17c4ee;
+  --cyan-d:#0a8fb3;
+  --amber:#f6b40e;
+  --ok:#14805a;--warn:#a0650a;--bad:#b4173a;
+  --logo:"Chewy","Comic Sans MS",cursive;
+  --board:"Barlow Condensed","Arial Narrow",sans-serif;
+  --body:"Figtree",system-ui,-apple-system,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.6}
+:focus-visible{outline:3px solid var(--hot);outline-offset:2px}
+h1,h2,h3,h4{margin:0;text-wrap:balance}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.lab{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan-d)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;padding:12px 20px;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:#fff;text-decoration:none;cursor:pointer}
+.btn:hover{background:#000}
+.btn.hot{background:var(--hot);border-color:var(--hot)}
+.btn.hot:hover{background:#d22f8b}
+.btn.line{background:transparent;color:var(--ink)}
+.btn.line:hover{background:var(--sky)}
+.btn.sm{font-size:13px;padding:7px 13px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.sample{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--warn);border:1px dashed var(--warn);padding:2px 8px;border-radius:4px}
+.confirm{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--cyan-d);border:1px dashed var(--cyan-d);padding:1px 7px;border-radius:4px}
+
+/* small wordmark */
+.wm{font-family:var(--logo);color:var(--magenta);text-decoration:none;line-height:1;letter-spacing:.01em;white-space:nowrap;display:inline-flex;align-items:center;gap:.3em}
+.wm i{font-style:normal;color:var(--ink);font-size:.62em}
+.wm .dot{width:.8em;height:.8em;border-radius:50%;background:var(--cyan);display:inline-block;flex-shrink:0;position:relative}
+.wm .dot::after{content:"";position:absolute;left:18%;top:34%;width:64%;height:36%;background:#fff;border-radius:999px}
+
+.notice{background:var(--ink);color:#fff;font-size:13.5px}
+.notice .wrap{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-block:8px}
+.notice b{color:var(--pink);font-family:var(--mono);font-weight:500;letter-spacing:.06em}
+.top{background:var(--hot);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--hot)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-block:10px}
+.top .wm{font-size:30px;color:#fff}
+.top .wm i{color:#fff}
+.nav{display:flex;gap:22px;font-weight:700;font-size:14.5px}
+.nav a{color:#fff;text-decoration:none}
+.nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.top-r{display:flex;gap:10px;align-items:center}
+.age{font-family:var(--mono);font-size:12px;background:#fff;color:var(--hot);padding:3px 9px;border-radius:999px;font-weight:500}
+.top .btn{background:#fff;border-color:#fff;color:var(--ink)}
+@media (max-width:900px){.nav{display:none}}
+@media (max-width:440px){.top .wm{font-size:25px}.top-r .btn{display:none}}
+
+/* hero */
+.hero{background:var(--sky);position:relative;overflow:hidden;border-bottom:1px solid var(--soft)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:48px 56px;position:relative}
+.trail{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.logo{width:100%;max-width:440px;height:auto;display:block}
+.hero h1{font-family:var(--board);font-weight:700;font-size:clamp(34px,4.6vw,54px);line-height:1;text-transform:uppercase;letter-spacing:.005em;margin-top:18px}
+.hero h1 em{font-style:normal;color:var(--hot)}
+.hero p{color:var(--gray);font-size:17px;max-width:46ch;margin:12px 0 0}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+@media (max-width:860px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.logo{max-width:340px}}
+
+/* departures board */
+.board{background:var(--plum);color:#fff;border-radius:14px;padding:18px;box-shadow:0 24px 50px -30px rgba(35,26,51,.7);min-width:0}
+.board .bh{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:10px;margin-bottom:6px}
+.board .bh b{font-family:var(--board);font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+.board .clock{font-family:var(--mono);font-size:13px;color:var(--amber)}
+.brow{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.12);font-family:var(--board);font-size:19px;letter-spacing:.04em;text-transform:uppercase}
+.brow:last-child{border-bottom:0}
+.brow .d{color:#bfb7d0}
+.brow .t{font-variant-numeric:tabular-nums}
+.brow .s{font-size:14px;padding:2px 9px;border-radius:4px;background:rgba(255,255,255,.08);color:#d8d2e6;text-align:center;min-width:86px}
+.brow.today .d,.brow.today .t{color:#fff}
+.brow.today{background:linear-gradient(90deg,rgba(23,196,238,.16),transparent);margin:0 -18px;padding-left:18px;padding-right:18px}
+.s.on{background:var(--cyan);color:var(--plum)}
+.s.late{background:var(--amber);color:var(--plum)}
+.s.off{background:transparent;color:#8f86a3;border:1px solid rgba(255,255,255,.18)}
+.board .bf{display:flex;gap:10px;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.14);font-size:14px;color:#d8d2e6}
+.board .bf i{width:11px;height:11px;border-radius:50%;background:#8f86a3;flex-shrink:0}
+.board .bf i.on{background:#4be3a6;box-shadow:0 0 0 4px rgba(75,227,166,.2)}
+
+section.s{padding-block:64px;border-bottom:1px solid var(--soft)}
+#home,section.s,#shelf{scroll-margin-top:72px}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.sh h2{font-family:var(--board);font-weight:700;font-size:clamp(34px,4.4vw,50px);line-height:1;text-transform:uppercase;margin-top:6px}
+.sh p{color:var(--gray);max-width:46ch;margin:0}
+
+/* two ways: boarding passes */
+.passes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.pass{display:grid;grid-template-columns:minmax(0,1fr) 92px;background:#fff;border:1.5px solid var(--ink);border-radius:14px;overflow:hidden;min-width:0}
+.pass .pm{padding:22px;min-width:0}
+.pass .pm .lab{color:var(--hot)}
+.pass h3{font-family:var(--board);font-size:30px;text-transform:uppercase;line-height:1;margin-top:6px}
+.pass p{color:var(--gray);margin:10px 0 0;font-size:15px}
+.pass ul{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:14.5px}
+.pass li{display:flex;gap:8px}
+.pass li::before{content:"✈";color:var(--cyan-d);font-size:12px;padding-top:3px}
+.stub{border-left:2px dashed var(--ink);background:var(--sky);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px 6px;text-align:center;position:relative}
+.stub::before,.stub::after{content:"";position:absolute;left:-11px;width:20px;height:20px;border-radius:50%;background:var(--paper);border:1.5px solid var(--ink)}
+.stub::before{top:-11px}.stub::after{bottom:-11px}
+.stub b{font-family:var(--board);font-size:34px;line-height:1}
+.stub span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
+.pass.del .stub{background:#fde9f4}
+@media (max-width:860px){.passes{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:420px){.pass{grid-template-columns:minmax(0,1fr) 74px}.stub b{font-size:26px}}
+
+.rules{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.rulebox{border:1.5px solid var(--ink);border-radius:14px;padding:22px;background:#fff}
+.rulebox ol{margin:0;padding-left:20px;display:grid;gap:10px}
+.rulebox li::marker{font-family:var(--mono);color:var(--hot)}
+.quit{background:var(--sky);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.quit h3{font-size:20px}
+.quit p{margin:0;color:var(--gray)}
+@media (max-width:860px){.rules{grid-template-columns:minmax(0,1fr)}}
+
+.whole{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:start}
+.whole ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.whole li{border-top:1.5px solid var(--ink);padding-top:10px}
+.whole li b{font-family:var(--board);font-size:22px;text-transform:uppercase;display:block;line-height:1.1}
+.whole li span{color:var(--gray);font-size:14.5px}
+.wform{background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wform input,.wform select,.wform textarea{border:1px solid var(--soft);border-radius:8px;padding:10px 11px;font-size:14.5px;min-width:0;width:100%;background:#fff}
+.wform .full{grid-column:1/-1}
+.wform textarea{min-height:76px;resize:vertical}
+@media (max-width:860px){.whole{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.wform{grid-template-columns:minmax(0,1fr)}}
+
+.visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.card{border:1px solid var(--soft);border-radius:14px;padding:22px;background:#fff;min-width:0}
+.card h3{font-size:18px;margin-bottom:10px}
+.hrs{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hrs td{padding:7px 0;border-bottom:1px solid var(--soft);font-size:15px}
+.hrs td:last-child{text-align:right;font-family:var(--mono);font-size:13.5px}
+.hrs tr.today td{font-weight:700;color:var(--hot)}
+.map svg{width:100%;height:auto;display:block;margin-top:12px}
+.copyrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.copyrow code{font-family:var(--mono);font-size:13.5px;background:var(--sky);padding:3px 8px;border-radius:6px;user-select:all}
+@media (max-width:860px){.visit{grid-template-columns:minmax(0,1fr)}}
+
+/* gate */
+.gate{background:var(--plum);color:#fff;border-radius:16px;padding:30px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:28px;align-items:center}
+.gate h3{font-family:var(--board);font-weight:700;font-size:clamp(30px,3.8vw,42px);text-transform:uppercase;line-height:1}
+.gate p{color:#d8d2e6;margin:10px 0 0}
+.gate ol{margin:0;padding-left:20px;color:#ece8f4;display:grid;gap:8px;font-size:14.5px}
+.gate ol li::marker{color:var(--cyan);font-family:var(--mono)}
+.gate .lab{color:var(--pink)}
+@media (max-width:860px){.gate{grid-template-columns:minmax(0,1fr)}}
+
+/* verified shelf */
+.warnbar{background:#fff;border:2px solid var(--ink);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.warnbar b{font-size:15px;flex:1 1 280px;min-width:0}
+.warnbar span{font-family:var(--mono);font-size:11px;color:var(--gray);white-space:nowrap}
+.shelf-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.search{flex:1 1 240px;min-width:0;border:1.5px solid var(--ink);border-radius:999px;padding:10px 16px;font-size:15px;background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1.5px solid var(--soft);background:#fff;border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:700;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.shelfgrid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}
+@media (max-width:960px){.shelfgrid{grid-template-columns:minmax(0,1fr)}}
+.prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.prod{border:1px solid var(--soft);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;background:#fff;min-width:0}
+.prod .br{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+.prod h4{font-family:var(--board);font-size:23px;text-transform:uppercase;line-height:1.05}
+.prod .house{font-family:var(--mono);font-size:10.5px;color:var(--hot);border:1px solid var(--hot);border-radius:999px;padding:1px 8px;align-self:flex-start}
+.specs{display:flex;flex-wrap:wrap;gap:6px}
+.specs span{font-family:var(--mono);font-size:11.5px;background:var(--sky);border-radius:4px;padding:2px 7px}
+.prod .ft{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:6px}
+.prod .pr{font-weight:700;font-size:18px}
+.prod .pr small{font-weight:500;font-size:11px;color:var(--gray);font-family:var(--mono)}
+.st{font-family:var(--mono);font-size:11px;font-weight:500}
+.st.ok{color:var(--ok)}.st.low{color:var(--warn)}.st.out{color:var(--bad)}
+.bag{position:sticky;top:84px;background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:18px;min-width:0}
+.bag h3{font-family:var(--board);font-size:26px;text-transform:uppercase;line-height:1}
+.bag .ln{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:7px 0;border-bottom:1px dashed var(--soft)}
+.bag .ln button{border:0;background:none;color:var(--bad);cursor:pointer;padding:0 0 0 8px}
+.bag .tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1.5px solid var(--ink);margin-top:8px;padding-top:10px;font-weight:700}
+.bag .tot b{font-family:var(--board);font-size:30px}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0}
+.mode button{border:1.5px solid var(--soft);border-radius:10px;background:#fff;padding:9px;font-weight:700;font-size:13.5px;cursor:pointer}
+.mode button[aria-pressed="true"]{border-color:var(--ink);background:var(--sky)}
+.bag input,.bag select{border:1px solid var(--soft);border-radius:8px;padding:9px 10px;font-size:14px;width:100%;min-width:0;margin-top:6px;background:#fff}
+.idnote{font-size:13px;background:#fde9f4;border-radius:8px;padding:10px 12px;margin-top:10px;color:var(--ink)}
+
+.foot{background:var(--plum);color:#d8d2e6;padding-block:28px;font-size:13.5px}
+.foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.foot .wm{font-size:28px;color:var(--pink)}
+.foot .wm i{color:#fff}
+.foot a{color:#fff}
+
+.mbg{position:fixed;inset:0;background:rgba(20,14,32,.6);display:grid;place-items:center;z-index:50;padding:16px}
+.modal{background:#fff;border-radius:16px;width:min(540px,100%);max-height:90vh;overflow:auto;padding:26px}
+.modal h3{font-family:var(--board);font-size:30px;text-transform:uppercase;line-height:1;margin-bottom:10px}
+.modal p{color:var(--gray);margin:0 0 12px}
+.steps{display:grid;gap:10px;margin:14px 0}
+.steps div{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--soft);border-radius:10px;padding:12px}
+.steps b{font-family:var(--mono);color:var(--hot)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(16px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:60;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ================= ADMIN ================= */
+.adm{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh;background:var(--cloud)}
+.side{background:var(--plum);color:#fff;padding:20px 12px;display:flex;flex-direction:column;gap:2px;position:sticky;top:0;height:100vh;overflow:auto;padding-left:max(12px,env(safe-area-inset-left,0px))}
+.side .wm{font-size:30px;margin:0 8px 22px;color:var(--pink)}
+.side .wm i{color:#fff}
+.side a.nv{display:flex;align-items:center;gap:11px;color:#fff;opacity:.66;text-decoration:none;padding:9px 10px;border-radius:8px;font-size:14px;font-weight:600}
+.side a.nv svg{width:17px;height:17px;flex-shrink:0}
+.side a.nv:hover{opacity:1}
+.side a.nv[aria-current="page"]{opacity:1;background:rgba(255,255,255,.09);box-shadow:inset 3px 0 0 var(--pink)}
+.side .badge{margin-left:auto;font-family:var(--mono);font-size:11px;background:var(--hot);padding:0 7px;border-radius:9px}
+.side .grow{flex:1}
+.side .me{border-top:1px solid rgba(255,255,255,.14);padding:14px 10px 0;font-size:13px;color:#d8d2e6}
+.main{min-width:0;padding-block:26px 70px;padding-left:max(26px,env(safe-area-inset-left,0px));padding-right:max(26px,env(safe-area-inset-right,0px))}
+.ah{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.ah h1{font-family:var(--board);font-weight:700;font-size:40px;text-transform:uppercase;line-height:1}
+.ah .sub{color:var(--gray);font-size:14px;margin-top:6px}
+.ah .acts{display:flex;gap:8px;flex-wrap:wrap}
+.mnav{display:none}
+@media (max-width:900px){
+  .adm{grid-template-columns:minmax(0,1fr)}.side{display:none}
+  .mnav{display:flex;gap:4px;overflow-x:auto;background:var(--plum);position:sticky;top:env(safe-area-inset-top,0px);z-index:10;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))}
+  .mnav a{flex-shrink:0;color:#fff;opacity:.65;text-decoration:none;font-size:13px;font-weight:600;padding:7px 10px;border-radius:8px}
+  .mnav a[aria-current="page"]{opacity:1;background:rgba(255,255,255,.12)}
+  .main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+}
+.pn{background:#fff;border:1px solid var(--soft);border-radius:12px;padding:18px;min-width:0}
+.pn .ph{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.pn h3{font-size:13px;font-family:var(--mono);font-weight:500;letter-spacing:.1em;text-transform:uppercase}
+.g{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g2{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1050px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g2,.g3{grid-template-columns:minmax(0,1fr)}}
+.kpi .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+.kpi .v{font-family:var(--board);font-weight:700;font-size:40px;line-height:1.05;margin-top:6px;font-variant-numeric:tabular-nums}
+.kpi .d{font-size:12.5px;color:var(--gray)}
+.kpi .d.up{color:var(--ok)}.kpi .d.bad{color:var(--bad)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;font-weight:500;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.p-ok{color:var(--ok);background:rgba(20,128,90,.1)}.p-warn{color:var(--warn);background:rgba(160,101,10,.12)}.p-bad{color:var(--bad);background:rgba(180,23,58,.1)}.p-mute{color:var(--gray);background:var(--sky)}.p-hot{color:#fff;background:var(--hot)}.p-cy{color:var(--plum);background:var(--cyan)}
+.tw{overflow-x:auto}
+table.t{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.t th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);font-weight:500;padding:8px;border-bottom:1.5px solid var(--ink);white-space:nowrap}
+.t td{padding:10px 8px;border-bottom:1px solid var(--soft);vertical-align:middle}
+.t tr:last-child td{border-bottom:0}
+.t td:first-child{min-width:190px}.t .num{text-align:right;font-family:var(--mono);font-size:13px}
+.t tr.block td{background:rgba(180,23,58,.05)}
+.ls .it{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--soft);font-size:14px}
+.ls .it:last-child{border-bottom:0}
+.ls small{display:block;color:var(--gray);font-size:12.5px}
+.inp,.sel2{border:1px solid var(--soft);background:#fff;border-radius:8px;padding:8px 10px;font-size:14px;min-width:0}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--soft);border-radius:8px;overflow:hidden;background:#fff}
+.seg button{border:0;background:transparent;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;color:var(--gray)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.pos{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:1050px){.pos{grid-template-columns:minmax(0,1fr)}}
+.pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;max-height:460px;overflow:auto}
+.pick button{text-align:left;border:1px solid var(--soft);background:#fff;border-radius:10px;padding:10px;cursor:pointer;font-size:13px}
+.pick button b{display:block;font-size:13.5px}
+.pick button span{font-family:var(--mono);font-size:11.5px;color:var(--gray)}
+.pick button:hover{border-color:var(--ink)}
+.pick button:disabled{opacity:.4;cursor:not-allowed}
+.tkt{position:sticky;top:16px;background:#fff;border:1.5px solid var(--ink);border-radius:12px;padding:18px}
+.tkt .ln{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:7px 0;border-bottom:1px dashed var(--soft)}
+.tkt .ln button{border:0;background:none;color:var(--bad);cursor:pointer;padding:0 0 0 8px}
+.tkt .tot{display:flex;justify-content:space-between;font-size:13.5px;padding:3px 0;color:var(--gray)}
+.tkt .grand{display:flex;justify-content:space-between;align-items:baseline;border-top:1.5px solid var(--ink);margin-top:8px;padding-top:10px;font-weight:700}
+.tkt .grand b{font-family:var(--board);font-size:36px}
+.idbox{border:1.5px solid var(--hot);border-radius:10px;padding:12px;margin-top:12px;display:grid;gap:10px;background:#fff6fb}
+.idbox h4{font-size:12.5px;font-family:var(--mono);font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--hot)}
+.idbox.ok{border-color:var(--ok);background:#f1faf6}
+.idbox.ok h4{color:var(--ok)}
+.idrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chk{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--soft);font-size:14px;cursor:pointer}
+.chk input{width:20px;height:20px;accent-color:var(--ok);flex-shrink:0}
+.hb{display:grid;grid-template-columns:110px minmax(0,1fr) 60px;gap:10px;align-items:center;font-size:13.5px;padding:5px 0}
+.hb .tr{height:8px;background:var(--sky);border-radius:4px;overflow:hidden}
+.hb .tr i{display:block;height:100%;background:var(--plum)}
+.hb .n{text-align:right;font-family:var(--mono);font-size:12.5px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fld{display:grid;gap:5px}
+.fld label{font-size:12.5px;font-weight:600;color:var(--gray)}
+.fld input,.fld select{border:1px solid var(--soft);border-radius:8px;padding:9px 10px;font-size:14px;min-width:0;width:100%}
+.fld.full{grid-column:1/-1}
+.bnav{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}
+@media (max-width:520px){.fg{grid-template-columns:minmax(0,1fr)}}
+/* flight board for deliveries */
+.fb{background:var(--plum);border-radius:12px;padding:6px 16px;color:#fff;overflow-x:auto}
+.fbr{display:grid;grid-template-columns:96px minmax(150px,1.3fr) minmax(120px,1fr) 70px 112px 150px;gap:12px;align-items:center;padding:11px 0;border-bottom:1px dashed rgba(255,255,255,.14);font-size:14px;min-width:760px}
+.fbr:last-child{border-bottom:0}
+.fbr.hd{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#bfb7d0}
+.fbr .code{font-family:var(--board);font-size:20px;letter-spacing:.06em;color:var(--amber)}
+.fbr small{display:block;color:#bfb7d0;font-size:12px}
+.fbr .btn{background:#fff;border-color:#fff;color:var(--ink)}
+.fbr .btn.hot{background:var(--hot);border-color:var(--hot);color:#fff}
+.fb .p-ok{background:#4be3a6;color:var(--plum)}.fb .p-bad{background:#ff8fa8;color:var(--plum)}.fb .p-warn{background:var(--amber);color:var(--plum)}
+.fix{border-left:3px solid var(--hot);padding:2px 0 2px 12px;margin-bottom:12px}
+.fix b{display:block;font-size:14.5px}
+.fix span{font-size:13px;color:var(--gray)}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="plane" viewBox="0 0 64 48"><path fill="currentColor" d="M4 22c0-2 2-3 5-3h16L36 3c1-2 3-2 5-2h3l-6 18h12l6-7h4l-3 12 3 12h-4l-6-7H38l6 18h-3c-2 0-4 0-5-2L25 29H9c-3 0-5-1-5-3z"/></symbol>
+  </defs>
+</svg>
+
+<!-- ================= PUBLIC ================= -->
+<div id="site">
+  <div class="notice"><div class="wrap"><span><b>19+ ONLY</b> · Specialty vape store. Photo ID if you look under 25.</span><span id="noticeHrs">Open late Fri &amp; Sat, till 1 am</span></div></div>
+  <header class="top">
+    <div class="wrap">
+      <a class="wm" href="#home" aria-label="Pay N' Puff home">PAY <i>n'</i> PUFF</a>
+      <nav class="nav" aria-label="Sections"><a href="#ways">Pickup &amp; delivery</a><a href="#rules">Store rules</a><a href="#wholesale">Wholesale</a><a href="#visit">Visit</a><a href="#verify">Shop</a></nav>
+      <div class="top-r"><span class="age">19+</span><a class="btn sm" href="#visit">15 Dunlop St E</a></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero" id="home">
+      <svg class="trail" viewBox="0 0 1200 520" preserveAspectRatio="none" aria-hidden="true"><path d="M-20 430 C 260 380, 380 120, 700 170 S 1100 60, 1240 40" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="14 12" stroke-linecap="round" opacity=".9"/></svg>
+      <div class="wrap">
+        <div>
+          <svg class="logo" viewBox="0 0 460 330" role="img" aria-label="Pay N' Puff logo: a sky-blue circle with a cloud, the words Pay n' Puff, and a small white plane on a dashed flight path, with We'll Fly to You! around the top.">
+            <defs><path id="arcTop" d="M88 168 A 142 142 0 0 1 372 168"/><path id="arcBot" d="M110 214 A 124 124 0 0 0 350 214"/></defs>
+            <path d="M18 238 C 70 300, 180 316, 250 300 S 380 250, 406 196" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="12 9" stroke-linecap="round"/>
+            <circle cx="230" cy="178" r="112" fill="#17c4ee" stroke="#231a33" stroke-width="3"/>
+            <g fill="#fff" stroke="#231a33" stroke-width="2.5">
+              <path d="M150 146c-4-20 16-34 33-26 6-20 36-24 46-6 14-12 38-4 38 16 18-2 28 16 20 30-8 16-28 14-36 8-8 12-30 14-40 2-12 10-34 8-40-6-16 2-26-10-21-18z"/>
+              <path d="M168 230c-4-14 10-24 22-18 6-12 26-12 30 2 12-4 22 6 18 18-6 10-20 8-26 2-8 8-24 8-30-2-8 4-16 2-14-2z"/>
+            </g>
+            <g font-family="Chewy,'Comic Sans MS',cursive" text-anchor="middle" fill="#c414b0" stroke="#231a33" stroke-width="2" paint-order="stroke">
+              <text x="226" y="158" font-size="56" transform="rotate(-4 226 158)">PAY</text>
+              <text x="236" y="200" font-size="34" fill="#c414b0">n'</text>
+              <text x="232" y="256" font-size="60" transform="rotate(3 232 256)">PUFF</text>
+            </g>
+            <text font-family="Chewy,'Comic Sans MS',cursive" font-size="28" fill="#fff" stroke="#c414b0" stroke-width="1" letter-spacing="1.5"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">We'll Fly to You!</textPath></text>
+            <text font-family="'DM Mono',monospace" font-size="12.5" font-weight="500" fill="#231a33" letter-spacing="2.2"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">15 DUNLOP ST E · BARRIE</textPath></text>
+            <use href="#plane" x="360" y="140" width="92" height="69" style="color:#fff" transform="rotate(-18 406 174)"/>
+          </svg>
+          <h1>Downtown Barrie's <em>late-night</em> vape store.</h1>
+          <p>On Dunlop St East, beside 5 Points Barber. Open till 1 am Friday and Saturday, and we deliver to verified adults with an ID check at the door.</p>
+          <div class="ctas"><a class="btn hot" href="#verify">Verified adults: shop &amp; order</a><a class="btn line" href="#visit">Hours &amp; directions</a></div>
+        </div>
+        <div class="board" aria-live="polite">
+          <div class="bh"><b>Departures · Gate 15</b><span class="clock" id="clock">--:--</span></div>
+          <div id="boardRows"></div>
+          <div class="bf"><i id="nowDot"></i><span id="nowText">Checking…</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="s" id="ways">
+      <div class="wrap">
+        <div class="sh"><div><div class="lab">Two ways to fly</div><h2>Walk in, or we fly to you</h2></div><p>Pay N' Puff started as a delivery service. Now there's a counter on Dunlop too.</p></div>
+        <div class="passes">
+          <div class="pass"><div class="pm"><div class="lab">In store</div><h3>15 Dunlop St E</h3><p>Come in, ask questions, and see what's in stock. Staff can walk you through devices and nicotine strengths.</p><ul><li>Open till 1 am Friday &amp; Saturday</li><li>Hold an order online, pick it up with ID</li><li>Device and battery drop-off for recycling</li></ul></div><div class="stub"><span>Gate</span><b>15</b><span>Dunlop E</span></div></div>
+          <div class="pass del"><div class="pm"><div class="lab">Delivery</div><h3>We'll fly to you</h3><p>Order after you verify your age online. The driver checks photo ID at the door before handing anything over.</p><ul><li>Recipient must be 19+ and named on the order</li><li>No ID, no handoff. The order comes back to the store</li><li>Bags are labelled "Must be received by a person 19+"</li></ul></div><div class="stub"><span>Flight</span><b>PNP</b><span>To your door</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="rules" style="background:var(--cloud)">
+      <div class="wrap">
+        <div class="sh"><div><div class="lab">Before you board</div><h2>Store rules</h2></div><p>Ontario law sets these. We follow every one, in the store and at your door.</p></div>
+        <div class="rules">
+          <div class="rulebox"><ol>
+            <li><b>19+ to enter, buy or receive a delivery.</b> No exceptions, including with a parent.</li>
+            <li><b>Bring photo ID.</b> We ask anyone who looks under 25, at the counter and at the door.</li>
+            <li><b>No buying for someone underage.</b> We'll refuse the sale and log it.</li>
+            <li><b>Testing follows provincial rules:</b> two people at a time, your own device or a disposable mouthpiece.</li>
+            <li><b>Nicotine is highly addictive.</b> Everything we sell is 20 mg/mL or less and carries the Ontario excise stamp.</li>
+          </ol></div>
+          <div class="quit"><div class="lab">Thinking about quitting?</div><h3>Free help is available.</h3><p>Health Canada lists free quit-smoking and quit-vaping support, including coaching by phone, text and online.</p><a class="btn line sm" href="https://www.canada.ca/en/health-canada/services/smoking-tobacco/quit-smoking.html" target="_blank" rel="noopener" style="align-self:flex-start">Health Canada resources</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="wholesale">
+      <div class="wrap">
+        <div class="sh"><div><div class="lab">For retailers</div><h2>Wholesale consultation</h2></div><p>For registered stores only. Pricing always depends on brand and quantity.</p></div>
+        <div class="whole">
+          <ul>
+            <li><b>Fair-price review</b><span>We look at what you're paying and where the market sits right now.</span></li>
+            <li><b>Price match &amp; price beat</b><span>Bring a quote. If we can match or beat it, we'll say so.</span></li>
+            <li><b>Market overview</b><span>A straight read on the competitive vape market across the region.</span></li>
+          </ul>
+          <form class="wform" id="wForm">
+            <input id="w-biz" placeholder="Store name" aria-label="Store name">
+            <input id="w-name" placeholder="Your name" aria-label="Your name">
+            <input id="w-email" type="email" placeholder="Email" aria-label="Email">
+            <select id="w-type" aria-label="Store type"><option>Specialty vape store</option><option>Convenience store</option><option>Other retailer</option></select>
+            <textarea class="full" id="w-msg" placeholder="Brands and quantities you're looking for" aria-label="What you're looking for"></textarea>
+            <label class="full" style="font-size:13px;color:var(--gray);display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="w-ok" style="width:auto;margin-top:4px"> I confirm this is a registered retail business. We check before quoting.</label>
+            <button class="btn full" type="submit">Request a consultation</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="visit" style="background:var(--cloud)">
+      <div class="wrap">
+        <div class="sh"><div><div class="lab">Visit</div><h2>Downtown on Dunlop</h2></div><p>Between 5 Points Barber and the rest of Dunlop East's late-night strip, a few minutes up from the waterfront.</p></div>
+        <div class="visit">
+          <div class="card"><h3>Hours</h3><table class="hrs"><tbody id="pubHours"></tbody></table><p style="margin:12px 0 0;font-size:13px;color:var(--gray)">Monday hours aren't confirmed yet. <span class="confirm">confirm</span></p></div>
+          <div class="card map"><h3>Find us</h3><p style="margin:0;font-weight:700">15 Dunlop St E, Barrie, ON L4M 1A2</p>
+            <div class="copyrow"><code id="em">paynpuffvapes@gmail.com</code><button class="btn sm line" type="button" id="cpEm">Copy email</button></div>
+            <svg viewBox="0 0 320 170" role="img" aria-label="Map: Pay N' Puff at 15 Dunlop Street East in downtown Barrie, near Five Points, with Kempenfelt Bay to the south.">
+              <rect width="320" height="170" fill="#eaf7fc"/>
+              <path d="M0 150 Q160 128 320 146 L320 170 L0 170Z" fill="#bfe9f7"/><text x="244" y="162" font-family="Figtree,sans-serif" font-size="9.5" font-weight="700" fill="#0a8fb3">KEMPENFELT BAY</text>
+              <path d="M0 78 L320 78" stroke="#fff" stroke-width="16"/><path d="M0 78 L320 78" stroke="#e3e0ea" stroke-width="16" opacity=".5"/>
+              <text x="230" y="70" font-family="Figtree,sans-serif" font-size="10" font-weight="700" fill="#5f5a6e">DUNLOP ST E →</text>
+              <path d="M78 0 L92 170" stroke="#fff" stroke-width="12"/><path d="M78 0 L92 170" stroke="#e3e0ea" stroke-width="12" opacity=".5"/>
+              <circle cx="84" cy="78" r="13" fill="none" stroke="#5f5a6e" stroke-width="1.2" stroke-dasharray="3 3"/><text x="40" y="104" font-family="Figtree,sans-serif" font-size="9.5" font-weight="700" fill="#5f5a6e">FIVE POINTS</text>
+              <rect x="122" y="48" width="44" height="22" fill="#e8429f" rx="4"/><text x="144" y="63" text-anchor="middle" font-family="Chewy,cursive" font-size="10.5" fill="#fff">PAY n' PUFF</text>
+              <rect x="170" y="52" width="34" height="18" fill="#fff" stroke="#e3e0ea" rx="3"/><text x="187" y="64" text-anchor="middle" font-family="Figtree,sans-serif" font-size="6.5" font-weight="700" fill="#5f5a6e">5 POINTS</text>
+              <circle cx="144" cy="78" r="4.5" fill="#e8429f"/><text x="144" y="40" text-anchor="middle" font-family="Figtree,sans-serif" font-size="10" font-weight="700" fill="#231a33">15 Dunlop St E</text>
+              <path d="M292 22 l8 -16 l8 16 z" fill="none" stroke="#231a33" stroke-width="1.5"/><text x="300" y="34" text-anchor="middle" font-family="Figtree,sans-serif" font-size="9" fill="#231a33">N</text>
+            </svg>
+            <p style="margin:6px 0 0;font-size:12.5px;color:var(--gray)">Simplified map, not to scale.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="verify">
+      <div class="wrap">
+        <div class="gate" id="gate">
+          <div><div class="lab">Verified adults only</div><h3>See the shelf, hold for pickup, or book a delivery.</h3><p>Canadian law only lets vape products be shown online to people whose age and identity have been verified. A checkbox or a birthday isn't enough, so we use a real ID check.</p><button class="btn hot" type="button" id="startVerify" style="margin-top:18px">Verify my age</button></div>
+          <ol><li>Take a photo of your government ID</li><li>Take a quick selfie to match it</li><li>Done in about a minute. We never store your ID number.</li></ol>
+        </div>
+        <div id="shelf" hidden>
+          <div class="warnbar" role="note"><b id="warnText">WARNING: Vaping products contain nicotine, a highly addictive chemical.</b><span>Health Canada</span></div>
+          <div class="sh" style="margin-bottom:18px"><div><div class="lab">The shelf · verified adult</div><h2>In stock tonight</h2></div><p>Prices include tax, same as your current site. <span class="confirm">stock levels are a demo</span></p></div>
+          <div class="shelf-top"><input class="search" id="q" type="search" placeholder="Search brand, puff count, device…" aria-label="Search the shelf"><div class="chips" id="cats" role="group" aria-label="Category"></div></div>
+          <div class="shelfgrid">
+            <div class="prods" id="prods"></div>
+            <aside class="bag" id="bag" aria-label="Your order"></aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot"><div class="wrap"><span class="wm">PAY <i>n'</i> PUFF</span><span>15 Dunlop St E, Barrie · 19+ only · Prices include tax · Concept by Kooht Studio · <a href="#admin-today">Staff login</a></span></div></footer>
+</div>
+
+<!-- ================= ADMIN ================= -->
+<div id="admin" hidden>
+  <div class="adm">
+    <aside class="side" id="side" aria-label="Admin navigation"></aside>
+    <div style="min-width:0"><nav class="mnav" id="mnav" aria-label="Admin sections"></nav><div class="main" id="am"></div></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<div id="mroot"></div>
+
+<script>
+(function(){
+function $(s){return document.querySelector(s)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function money(n){return '$'+Number(n).toFixed(2)}
+function toast(t){var e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){e.classList.remove('show')},2800)}
+function nowT(){var d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+var HST=0.13,WARN=['WARNING: Vaping products contain nicotine, a highly addictive chemical.','WARNING: Vaping products release chemicals that may harm your health.'];
+var DAYN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],DS=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+/* Google listing hours. 25 = 1 am the next day. Monday unconfirmed. */
+var HRS={0:[12,20],1:null,2:[12,21],3:[12,21],4:[12,22],5:[12,25],6:[12,25]};
+function fh(h){var x=h%24,ap=x<12?'am':'pm',y=x%12||12;return y+' '+ap}
+function span(d){var r=HRS[d];return r?fh(r[0])+' – '+fh(r[1]):'Closed'}
+function openNow(){var n=new Date(),d=n.getDay(),h=n.getHours()+n.getMinutes()/60,t=HRS[d],y=HRS[(d+6)%7];
+ if(t&&h>=t[0]&&h<t[1])return {open:true,until:t[1]};
+ if(y&&y[1]>24&&h<y[1]-24)return {open:true,until:y[1]};
+ return {open:false}}
+function nextOpen(){var n=new Date(),d=n.getDay(),h=n.getHours();for(var i=0;i<8;i++){var k=(d+i)%7,r=HRS[k];if(!r)continue;if(i===0&&h>=r[0])continue;return (i===0?'today':i===1?'tomorrow':DAYN[k])+' at '+fh(r[0])}return 'soon'}
+
+/* -------- products: names and prices from paynpuffvapes.com; nicotine and stamp to confirm -------- */
+var CATS=['Disposables','Pods','Devices'];
+var P=[
+ ['PNP-30K',"Pay N' Puff",'30K disposable','Disposables',20,'30,000 puffs',45,18,8,'ON','House brand',true],
+ ['OXB-10K','OXBAR','Rocky Vapor 10K','Disposables',20,'10,000 puffs',35,9,6,'ON','Distributor A'],
+ ['FBM-8K','Flavour Beast','Beast Mode 8K','Disposables',20,'8,000 puffs',40,7,6,'ON','Distributor B'],
+ ['STL-8K','STLTH','Dispo 8K','Disposables',20,'8,000 puffs',40,2,6,'ON','Distributor C'],
+ ['GKB-9K','Geek Bar','9K digital','Disposables',20,'9,000 puffs',35,11,6,'ON','Distributor A'],
+ ['VCE-55','VICE','5.5K disposable','Disposables',20,'5,500 puffs',30,6,4,'ON','Distributor B'],
+ ['GKB-5K','Geek Bar','5K','Disposables',20,'5,000 puffs',30,0,4,'ON','Distributor A'],
+ ['DRP-5K',"Drip'n",'5K disposable','Disposables',20,'5,000 puffs',30,5,4,'ON','Distributor C'],
+ ['ZPD-3','Z Pods','Pod pack','Pods',20,'Pods',25,14,6,'ON','Distributor C'],
+ ['STL-DEV','STLTH','Vaping device','Devices',0,'Battery device',25,6,3,'n/a','Distributor C'],
+ ['IMP-50','Imported disposable','(sample: from a shipment)','Disposables',50,'6,000 puffs',30,12,0,'none','Distributor D'],
+ ['OLD-CA','Older pod stock','(sample: Canada stamp only)','Pods',20,'Pods',20,6,0,'CA','Distributor B']
+].map(function(r){return {sku:r[0],brand:r[1],name:r[2],cat:r[3],nic:r[4],size:r[5],price:r[6],stock:r[7],par:r[8],stamp:r[9],sup:r[10],house:!!r[11],cost:+(r[6]*(r[11]?.38:.55)).toFixed(2)}});
+function sellable(p){return p.nic<=20&&(p.stamp==='ON'||p.stamp==='n/a')}
+function flag(p){if(p.nic>20)return 'Over 20 mg/mL: federal cap';if(p.stamp==='CA')return 'Canada stamp only: Ontario stamp required';if(p.stamp==='none')return 'Unstamped';return ''}
+function bySku(k){return P.filter(function(x){return x.sku===k})[0]}
+
+var S={verified:false,bag:[],mode:'pickup',
+ flights:[
+  {code:'PNP-118',who:'Verified customer · M.',addr:'Mapleview Dr E area',items:[['GKB-9K',1],['ZPD-3',1]],total:60,st:'Boarding',driver:'Driver 1',eta:'22:40'},
+  {code:'PNP-117',who:'Verified customer · J.',addr:'Allandale',items:[['PNP-30K',1]],total:45,st:'In flight',driver:'Driver 2',eta:'22:15'},
+  {code:'PNP-116',who:'Verified customer · R.',addr:'Georgian Dr area',items:[['OXB-10K',2]],total:70,st:'Landed',driver:'Driver 1',eta:'21:30',id:"Driver's licence · 27"},
+  {code:'PNP-115',who:'Verified customer · K.',addr:'Painswick',items:[['VCE-55',1]],total:30,st:'Returned',driver:'Driver 2',eta:'21:05',id:'No ID at door'}],
+ holds:[{who:'Verified customer · T.',sku:'STL-8K',t:'Today'}],
+ sales:[{t:'19:42',items:2,total:75,how:'Card',id:'Looks 25+'},{t:'20:15',items:1,total:45,how:'Cash',id:'ID checked · 22'},{t:'21:02',items:1,total:35,how:'e-Transfer',id:'ID checked · 34'}],
+ idlog:[{t:'20:15',staff:'Owner',where:'Counter',res:'Pass',type:"Driver's licence",age:22},{t:'20:48',staff:'Owner',where:'Counter',res:'Refused',type:'No ID',age:null},{t:'21:05',staff:'Driver 2',where:'Door',res:'Refused',type:'No ID at door',age:null},{t:'21:30',staff:'Driver 1',where:'Door',res:'Pass',type:"Driver's licence",age:27}],
+ wh:[{biz:'Sample store A',city:'Innisfil',type:'Specialty vape store',st:'Verified',ask:'Geek Bar 9K, 10 boxes',quote:'Sent'},{biz:'Sample store B',city:'Orillia',type:'Convenience store',st:'Check registration',ask:'Z Pods, 20 packs',quote:'Hold'}],
+ checklist:{signs:true,hidden:true,sign:true,stamps:false,bags:true,two:false,reg:true}};
+var shelfCat='All',shelfQ='';
+
+/* -------- public -------- */
+function drawBoard(){
+ var n=new Date(),d=n.getDay(),o=openNow();
+ $('#clock').textContent=n.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+ var order=[];for(var i=0;i<7;i++)order.push((d+i)%7);
+ $('#boardRows').innerHTML=order.map(function(k,i){var r=HRS[k],st=!r?'<span class="s off">No flights</span>':i===0&&o.open?'<span class="s on">Boarding</span>':r[1]>24?'<span class="s late">Late</span>':'<span class="s">On time</span>';
+  return '<div class="brow'+(i===0?' today':'')+'"><span class="d">'+(i===0?'Today':DS[k])+'</span><span class="t">'+(r?span(k):'Closed'+(k===1?' *':''))+'</span>'+st+'</div>'}).join('');
+ $('#nowDot').className=o.open?'on':'';
+ $('#nowText').textContent=o.open?'Open now · until '+fh(o.until)+'. Deliveries running.':'Closed now · opens '+nextOpen()+'.';
+}
+drawBoard();setInterval(drawBoard,30000);
+(function(){var d=new Date().getDay();$('#pubHours').innerHTML=[1,2,3,4,5,6,0].map(function(i){return '<tr'+(i===d?' class="today"':'')+'><td>'+DAYN[i]+'</td><td>'+span(i)+(i===1?' *':'')+'</td></tr>'}).join('')})();
+$('#cpEm').onclick=function(){var t=$('#em').textContent;try{navigator.clipboard.writeText(t).then(function(){toast('Email copied')},function(){selEm()})}catch(e){selEm()}};
+function selEm(){var r=document.createRange();r.selectNodeContents($('#em'));var s=getSelection();s.removeAllRanges();s.addRange(r);toast('Selected. Copy it from here.')}
+$('#wForm').addEventListener('submit',function(e){e.preventDefault();var b=$('#w-biz').value.trim(),em=$('#w-email').value.trim();if(!b||!em){toast('Add your store name and email');return}if(!$('#w-ok').checked){toast('Please confirm this is a registered retailer');return}
+ S.wh.unshift({biz:b,city:'—',type:$('#w-type').value,st:'Check registration',ask:$('#w-msg').value.trim()||'Consultation',quote:'New'});this.reset();toast('Request sent. We check registration before quoting.')});
+
+$('#startVerify').onclick=function(){modal('<h3>Verify your age</h3><p>On the live site, a certified ID-verification service checks your government photo ID and a selfie. We only keep the result (verified, 19+), never your ID number.</p><div class="steps"><div><b>1</b><span>Photo of your driver\'s licence, Ontario Photo Card or passport</span></div><div><b>2</b><span>Quick selfie to match the photo</span></div><div><b>3</b><span>Verified for 30 days on this device</span></div></div><p style="font-size:13px">This is a demo, so no real check runs here.</p><div class="bnav"><button class="btn line" data-close type="button">Cancel</button><button class="btn hot" id="demoVerify" type="button">Demo: continue as a verified adult</button></div>')};
+function showShelf(){$('#gate').hidden=true;$('#shelf').hidden=false;drawShelf();drawBag()}
+function drawShelf(){
+ $('#cats').innerHTML=['All'].concat(CATS).map(function(c){return '<button type="button" data-sc="'+c+'" aria-pressed="'+(c===shelfCat)+'">'+c+'</button>'}).join('');
+ var q=shelfQ.toLowerCase();
+ var list=P.filter(function(p){return sellable(p)&&(shelfCat==='All'||p.cat===shelfCat)&&(!q||(p.brand+' '+p.name+' '+p.size+' '+p.cat).toLowerCase().indexOf(q)>-1)});
+ $('#prods').innerHTML=list.length?list.map(function(p){var inb=S.bag.filter(function(x){return x===p.sku}).length,st=p.stock<=0?'<span class="st out">Sold out</span>':p.stock<=2?'<span class="st low">'+p.stock+' left</span>':'<span class="st ok">In stock</span>';
+   return '<div class="prod">'+(p.house?'<span class="house">House brand</span>':'')+'<div class="br">'+esc(p.brand)+' · '+p.cat+'</div><h4>'+esc(p.name)+'</h4><div class="specs">'+(p.nic?'<span>'+p.nic+' mg/mL</span>':'')+'<span>'+esc(p.size)+'</span><span>ON stamp</span></div><div class="ft"><span class="pr">'+money(p.price)+' <small>tax in</small></span>'+st+'</div><button type="button" class="btn sm '+(inb?'hot':'line')+'" data-addb="'+p.sku+'" '+(p.stock<=inb?'disabled':'')+'>'+(inb?'In order ('+inb+') · add another':'Add to order')+'</button></div>'}).join(''):'<p style="color:var(--gray)">Nothing matches. Ask us in store or by email.</p>';
+}
+function drawBag(){
+ var tot=S.bag.reduce(function(s,k){return s+bySku(k).price},0),grp={};S.bag.forEach(function(k){grp[k]=(grp[k]||0)+1});
+ $('#bag').innerHTML='<div class="lab">Your order</div><h3 style="margin-top:4px">Boarding pass</h3>'+
+ (S.bag.length?Object.keys(grp).map(function(k){var p=bySku(k);return '<div class="ln"><span>'+grp[k]+' × '+esc(p.brand+' '+p.name)+'</span><span>'+money(p.price*grp[k])+'<button type="button" data-rmb="'+k+'" aria-label="Remove one">✕</button></span></div>'}).join(''):'<p style="color:var(--gray);font-size:14px;margin:8px 0 0">Add something from the shelf.</p>')+
+ '<div class="tot"><span>Total, tax in</span><b>'+money(tot)+'</b></div>'+
+ '<div class="mode" role="group" aria-label="Pickup or delivery"><button type="button" data-mode="pickup" aria-pressed="'+(S.mode==='pickup')+'">Pick up in store</button><button type="button" data-mode="delivery" aria-pressed="'+(S.mode==='delivery')+'">Delivery</button></div>'+
+ (S.mode==='delivery'?'<input id="b-name" placeholder="Name of the adult receiving it" aria-label="Recipient name"><input id="b-addr" placeholder="Street address in Barrie" aria-label="Address"><div class="idnote"><b>ID at the door.</b> The person named here must be 19+ and show photo ID. If they can\'t, the driver brings the order back to the store.</div>':'<input id="b-name" placeholder="Name for the hold" aria-label="Name for the hold"><div class="idnote"><b>Held for 24 hours.</b> Bring photo ID that matches the name. Pay at the counter.</div>')+
+ '<button type="button" class="btn hot" id="bGo" style="width:100%;margin-top:12px" '+(S.bag.length?'':'disabled')+'>'+(S.mode==='delivery'?'Book delivery':'Hold for pickup')+'</button>';
+}
+var wi=0;setInterval(function(){if(!S.verified)return;wi=(wi+1)%2;var w=$('#warnText');if(w)w.textContent=WARN[wi]},7000);
+document.getElementById('site').addEventListener('click',function(e){
+ var t=e.target.closest('[data-sc],[data-addb],[data-rmb],[data-mode],#bGo');if(!t)return;
+ if(t.dataset.sc){shelfCat=t.dataset.sc;drawShelf();return}
+ if(t.dataset.addb){S.bag.push(t.dataset.addb);drawShelf();drawBag();return}
+ if(t.dataset.rmb){S.bag.splice(S.bag.indexOf(t.dataset.rmb),1);drawShelf();drawBag();return}
+ if(t.dataset.mode){S.mode=t.dataset.mode;drawBag();return}
+ if(t.id==='bGo'){var nm=($('#b-name')||{}).value||'';nm=nm.trim();if(!nm){toast('Add a name');return}
+  var grp={};S.bag.forEach(function(k){grp[k]=(grp[k]||0)+1});var tot=S.bag.reduce(function(s,k){return s+bySku(k).price},0);
+  if(S.mode==='delivery'){var ad=$('#b-addr').value.trim();if(!ad){toast('Add the delivery address');return}
+   var code='PNP-'+(119+S.flights.filter(function(f){return +f.code.slice(4)>=119}).length);
+   S.flights.unshift({code:code,who:'Verified customer · '+nm.charAt(0).toUpperCase()+'.',addr:ad,items:Object.keys(grp).map(function(k){return [k,grp[k]]}),total:tot,st:'Booked',driver:'—',eta:'—'});
+   toast('Booked as '+code+'. Have photo ID ready at the door.')}
+  else{Object.keys(grp).forEach(function(k){S.holds.push({who:'Verified customer · '+nm.charAt(0).toUpperCase()+'.',sku:k,t:'Today'})});toast('Held for 24 hours. Bring photo ID.')}
+  S.bag=[];drawShelf();drawBag();return}
+});
+$('#q').addEventListener('input',function(e){shelfQ=e.target.value;drawShelf()});
+
+/* -------- modal -------- */
+function modal(h){$('#mroot').innerHTML='<div class="mbg" id="mbg"><div class="modal" role="dialog" aria-modal="true">'+h+'</div></div>';var f=$('#mroot .bnav button:last-child');if(f)f.focus()}
+function closeM(){$('#mroot').innerHTML=''}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM()});
+$('#mroot').addEventListener('click',function(e){
+ if(e.target.id==='mbg'||e.target.closest('[data-close]')){closeM();return}
+ if(e.target.id==='demoVerify'){S.verified=true;closeM();showShelf();toast('Verified. Showing the shelf.');return}
+ if(e.target.id==='rcvSave'){var p=bySku($('#rc-sku').value),q=+$('#rc-q').value||0;p.stock+=q;closeM();re();toast('Received '+q+' × '+p.brand+' '+p.name);return}
+ var d=e.target.closest('[data-door]');if(d){var f=S.flights[+d.dataset.i],ok=d.dataset.door==='pass';
+  if(ok){var v=$('#dr-dob').value,ty=$('#dr-type').value,nm=$('#dr-name').checked;if(!v){toast('Enter the date of birth from the ID');return}if(!nm){toast('The name on the ID must match the order');return}
+   var age=ageOf(v);if(age<19){S.idlog.push({t:nowT(),staff:f.driver,where:'Door',res:'Refused',type:ty,age:age});f.st='Returned';f.id='Under 19 at door';closeM();re();toast('Under 19. Not handed over. Logged and returning to store.');return}
+   S.idlog.push({t:nowT(),staff:f.driver,where:'Door',res:'Pass',type:ty,age:age});f.st='Landed';f.id=ty+' · '+age;f.items.forEach(function(it){var p=bySku(it[0]);p.stock=Math.max(0,p.stock-it[1])});closeM();re();toast(f.code+' landed. ID checked, age '+age+'.')}
+  else{S.idlog.push({t:nowT(),staff:f.driver,where:'Door',res:'Refused',type:'No ID at door',age:null});f.st='Returned';f.id='No ID at door';closeM();re();toast(f.code+' coming back to the store. Refusal logged.')}
+  return}
+});
+function ageOf(v){var dob=new Date(v+'T00:00'),n=new Date();return n.getFullYear()-dob.getFullYear()-((n.getMonth()<dob.getMonth()||(n.getMonth()===dob.getMonth()&&n.getDate()<dob.getDate()))?1:0)}
+
+/* ================= ADMIN ================= */
+var IC={today:'<path d="M3 13h8V3H3zM13 21h8V11h-8zM3 21h8v-6H3zM13 3v6h8V3z"/>',checkout:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',flights:'<path d="M2 16l20-8-6 12-3-5z"/><path d="M13 15l-2 5"/>',inventory:'<path d="M21 8l-9-5-9 5 9 5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/>',wholesale:'<path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-7h6v7"/>',compliance:'<path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',staff:'<circle cx="12" cy="7" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',reports:'<path d="M3 21h18M6 17V9M11 17V5M16 17v-6M21 17v-3"/>'};
+var PAGES=[['today','Today'],['checkout','Checkout'],['flights','Deliveries'],['inventory','Inventory'],['wholesale','Wholesale'],['compliance','Compliance'],['staff','Late shifts'],['reports','Reports']];
+var page='today',cart=[],idState=null,invF='All',invQ='';
+function blocked(){return P.filter(function(p){return !sellable(p)&&p.stock>0}).length}
+function lowN(){return P.filter(function(p){return sellable(p)&&p.stock<=p.par&&p.par>0}).length}
+function openTasks(){var c=S.checklist;return Object.keys(c).filter(function(k){return !c[k]}).length}
+function liveFlights(){return S.flights.filter(function(f){return f.st==='Booked'||f.st==='Boarding'||f.st==='In flight'}).length}
+function nav(){
+ var b={flights:liveFlights(),inventory:blocked()+lowN(),wholesale:S.wh.filter(function(w){return w.quote==='New'||w.st==='Check registration'}).length,compliance:openTasks()};
+ $('#side').innerHTML='<a class="wm" href="#home">PAY <i>n\'</i> PUFF</a>'+PAGES.map(function(p){return '<a class="nv" href="#admin-'+p[0]+'" '+(page===p[0]?'aria-current="page"':'')+'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">'+IC[p[0]]+'</svg>'+p[1]+(b[p[0]]?'<span class="badge">'+b[p[0]]+'</span>':'')+'</a>'}).join('')+'<div class="grow"></div><div class="me">Signed in · Owner<br><a href="#home" style="color:#fff">View website →</a></div>';
+ $('#mnav').innerHTML='<a href="#home">Site</a>'+PAGES.map(function(p){return '<a href="#admin-'+p[0]+'" '+(page===p[0]?'aria-current="page"':'')+'>'+p[1]+(b[p[0]]?' · '+b[p[0]]:'')+'</a>'}).join('');
+}
+function head(t,s,a){return '<div class="ah"><div><h1>'+t+'</h1><div class="sub">'+s+'</div></div><div class="acts">'+(a||'')+'</div></div>'}
+function kpi(k,v,d,c){return '<div class="pn kpi"><div class="k">'+k+'</div><div class="v">'+v+'</div><div class="d '+(c||'')+'">'+d+'</div></div>'}
+
+function pToday(){
+ var d=new Date().getDay(),tot=S.sales.reduce(function(s,x){return s+x.total},0)+S.flights.filter(function(f){return f.st==='Landed'}).reduce(function(s,f){return s+f.total},0),ref=S.idlog.filter(function(x){return x.res==='Refused'}).length;
+ return head('Today',new Date().toLocaleDateString([], {weekday:'long',month:'long',day:'numeric'})+' · '+span(d),'<a class="btn sm hot" href="#admin-checkout">New sale</a><a class="btn sm line" href="#admin-flights">Deliveries</a>')+
+ '<div class="g g4">'+kpi('Sales, tax in',money(tot),S.sales.length+' counter · '+S.flights.filter(function(f){return f.st==='Landed'}).length+' delivered','up')+kpi('Deliveries live',String(liveFlights()),'booked, boarding or in flight')+kpi('ID checks',String(S.idlog.length),ref+' refused (counter + door)')+kpi('Blocked stock',String(blocked()),'can\'t be sold',blocked()?'bad':'')+'</div>'+
+ '<div class="g g2" style="margin-top:16px"><div class="pn"><div class="ph"><h3>Needs you</h3></div><div class="ls">'+
+  S.flights.filter(function(f){return f.st==='Booked'}).map(function(f){return '<div class="it"><span><b>New delivery '+f.code+'</b><small>'+esc(f.addr)+' · '+money(f.total)+' · assign a driver</small></span><a class="btn sm hot" href="#admin-flights">Dispatch</a></div>'}).join('')+
+  (blocked()?'<div class="it"><span><b>'+blocked()+' products blocked from sale</b><small>Over 20 mg/mL or missing the Ontario stamp. Pulled from the till, the website and delivery.</small></span><a class="btn sm line" href="#admin-inventory">Review</a></div>':'')+
+  (openTasks()?'<div class="it"><span><b>'+openTasks()+' compliance items open</b><small>Including: two staff on after 10 pm</small></span><a class="btn sm line" href="#admin-compliance">Finish</a></div>':'')+
+  (lowN()?'<div class="it"><span><b>'+lowN()+' products at or below par</b><small>Before the Friday late shift</small></span><a class="btn sm line" href="#admin-inventory">Reorder</a></div>':'')+
+  S.holds.map(function(h){var p=bySku(h.sku);return '<div class="it"><span><b>Pickup hold · '+esc(h.who)+'</b><small>'+esc(p.brand+' '+p.name)+' · check ID at the counter</small></span><a class="btn sm line" href="#admin-checkout">Ring up</a></div>'}).join('')+
+ '</div></div><div class="pn"><div class="ph"><h3>Tonight</h3></div><div class="ls">'+
+  '<div class="it"><span>Open<small>'+span(d)+'</small></span><span class="pill '+(openNow().open?'p-ok':'p-mute')+'">'+(openNow().open?'Open now':'Closed')+'</span></div>'+
+  S.sales.slice().reverse().map(function(x){return '<div class="it"><span>'+x.t+' · '+x.items+' item'+(x.items>1?'s':'')+' · '+x.how+'<small>'+x.id+'</small></span><b style="font-family:var(--mono)">'+money(x.total)+'</b></div>'}).join('')+'</div></div></div>';
+}
+
+function idPanel(){
+ if(idState&&idState.ok)return '<div class="idbox ok"><h4>Age check passed</h4><div style="font-size:14px">'+esc(idState.label)+'</div><button type="button" class="btn sm line" id="idReset" style="justify-self:start">Redo check</button></div>';
+ return '<div class="idbox"><h4>Age check required</h4><div style="font-size:13.5px;color:var(--gray)">Ask for ID from anyone who looks under 25. Never type the ID number.</div>'+
+  '<div class="idrow"><button type="button" class="btn sm line" id="id25">Clearly 25+</button></div>'+
+  '<div class="idrow"><select class="sel2" id="idType" aria-label="ID type"><option>Driver\'s licence</option><option>Ontario Photo Card</option><option>Passport</option><option>Permanent resident card</option></select><input class="inp" id="idDob" type="date" aria-label="Date of birth on ID"><button type="button" class="btn sm" id="idCheck">Check</button></div>'+
+  '<div class="idrow"><button type="button" class="btn sm line" id="idRefuse" style="color:var(--bad);border-color:var(--bad)">Refuse sale · no ID</button></div></div>';
+}
+function pCheckout(){
+ var pick=P.map(function(p){var ok=sellable(p)&&p.stock>0;return '<button type="button" data-add="'+p.sku+'" '+(ok?'':'disabled')+'><b>'+esc(p.brand)+' '+esc(p.name)+'</b><span>'+money(p.price)+' · '+(sellable(p)?p.stock+' left':'blocked')+'</span></button>'}).join('');
+ var tot=cart.reduce(function(s,x){return s+x.price},0),pre=tot/(1+HST);
+ var ok=cart.length&&idState&&idState.ok;
+ return head('Checkout','Prices are tax-in, like the website. Every sale goes through an age check.')+
+ '<div class="pos"><div class="pn"><div class="ph"><h3>Products</h3><span class="pill p-mute">Names &amp; prices from your site</span></div><div class="pick">'+pick+'</div></div>'+
+ '<div class="tkt"><div class="ph" style="margin-bottom:6px"><h3>Ticket</h3></div>'+
+  (cart.length?cart.map(function(x,i){return '<div class="ln"><span>'+esc(x.name)+'</span><span>'+money(x.price)+'<button type="button" data-rm="'+i+'" aria-label="Remove">✕</button></span></div>'}).join(''):'<p style="color:var(--gray);font-size:14px;margin:0">Tap a product to add it.</p>')+
+  '<div style="margin-top:8px"><div class="tot"><span>Before tax</span><span>'+money(pre)+'</span></div><div class="tot"><span>HST 13% included</span><span>'+money(tot-pre)+'</span></div></div>'+
+  '<div class="grand"><span>Total</span><b>'+money(tot)+'</b></div>'+idPanel()+
+  '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:12px">'+['Card','Cash','e-Transfer'].map(function(m,i){return '<button type="button" class="btn sm '+(i?'line':'hot')+'" data-pay="'+m+'" '+(ok?'':'disabled')+'>'+m+'</button>'}).join('')+'</div></div></div>';
+}
+function pFlights(){
+ var nextSt={Booked:'Boarding',Boarding:'In flight'},cls={Booked:'p-hot',Boarding:'p-cy','In flight':'p-warn',Landed:'p-ok',Returned:'p-bad'};
+ var row=function(f,i){var items=f.items.map(function(it){var p=bySku(it[0]);return it[1]+' × '+p.brand+' '+p.name}).join(', ');
+  var act=f.st==='Booked'?'<select class="sel2" data-drv="'+i+'" aria-label="Driver"><option value="">Driver…</option><option>Driver 1</option><option>Driver 2</option></select>':f.st==='Boarding'?'<button class="btn sm" type="button" data-fly="'+i+'">Take off</button>':f.st==='In flight'?'<button class="btn sm hot" type="button" data-land="'+i+'">At the door</button>':'<span style="font-size:12.5px;color:#bfb7d0">'+esc(f.id||'')+'</span>';
+  return '<div class="fbr"><span class="code">'+f.code+'</span><span>'+esc(f.who)+'<small>'+esc(f.addr)+'</small></span><span style="font-size:13px">'+esc(items)+'<small>'+money(f.total)+' tax in</small></span><span style="font-family:var(--mono);font-size:13px">'+f.eta+'<small>'+esc(f.driver)+'</small></span><span><span class="pill '+cls[f.st]+'">'+f.st+'</span></span><span>'+act+'</span></div>'};
+ var landed=S.flights.filter(function(f){return f.st==='Landed'}).length,ret=S.flights.filter(function(f){return f.st==='Returned'}).length;
+ return head('Deliveries','Every flight lands only after a photo-ID check at the door. No ID, no handoff.')+
+ '<div class="g g4">'+kpi('Live',String(liveFlights()),'booked to in flight')+kpi('Landed tonight',String(landed),'ID checked at door','up')+kpi('Returned',String(ret),'no ID or under 19',ret?'bad':'')+kpi('Avg. flight','24 min','sample','')+'</div>'+
+ '<div class="fb" style="margin-top:16px"><div class="fbr hd"><span>Flight</span><span>Customer</span><span>Order</span><span>ETA</span><span>Status</span><span></span></div>'+S.flights.map(row).join('')+'</div>'+
+ '<div class="g g3" style="margin-top:16px"><div class="pn"><h3>Door rules for drivers</h3><div class="ls" style="margin-top:6px"><div class="it"><span>Hand over only to the adult named on the order</span></div><div class="it"><span>Photo ID from anyone who looks under 25</span></div><div class="it"><span>No ID or under 19: bring it back and log it</span></div><div class="it"><span>Never leave it at the door or with someone else</span></div></div></div>'+
+ '<div class="pn"><h3>Delivery area</h3><p style="margin:6px 0 0;font-size:14px;color:var(--gray)">Barrie neighbourhoods from the store. Set your own zones, fees and cut-off times here.</p><p style="margin:10px 0 0"><span class="sample">Zones not set yet</span></p></div>'+
+ '<div class="pn"><h3>Packaging</h3><p style="margin:6px 0 0;font-size:14px;color:var(--gray)">Each bag gets a label: "Must be received by a person 19 years of age or older." The health unit recommends it for delivery orders.</p></div></div>';
+}
+function pInventory(){
+ var q=invQ.toLowerCase();
+ var list=P.filter(function(p){return (invF==='All'||(invF==='Blocked'?!sellable(p):invF==='Low'?(sellable(p)&&p.stock<=p.par&&p.par>0):invF==='House'?p.house:p.cat===invF))&&(!q||(p.brand+' '+p.name+' '+p.sku).toLowerCase().indexOf(q)>-1)});
+ var val=P.reduce(function(s,p){return s+p.cost*p.stock},0),po={};
+ P.filter(function(p){return sellable(p)&&p.stock<=p.par&&p.par>0}).forEach(function(p){(po[p.sup]=po[p.sup]||[]).push(p)});
+ return head('Inventory','Nicotine and Ontario stamp checks on every product. Anything that fails is pulled from the counter, the website and delivery.','<button class="btn sm" id="rcv" type="button">Receive shipment</button>')+
+ '<div class="g g4">'+kpi('Stock at cost',money(val),P.length+' SKUs · sample costs')+kpi('Blocked',String(blocked()),'over cap or unstamped',blocked()?'bad':'')+kpi('Low stock',String(lowN()),'at or below par')+kpi('House brand',String(bySku('PNP-30K').stock),"Pay N' Puff 30K on hand")+'</div>'+
+ '<div class="g g2" style="margin-top:16px"><div class="pn"><div class="ph"><div class="seg" role="group" aria-label="Filter">'+['All','Disposables','Pods','House','Low','Blocked'].map(function(f){return '<button type="button" data-if="'+f+'" aria-pressed="'+(invF===f)+'">'+f+'</button>'}).join('')+'</div><input class="inp" id="invQ" type="search" placeholder="Search" value="'+esc(invQ)+'" aria-label="Search inventory"></div>'+
+ '<div class="tw"><table class="t"><thead><tr><th>Product</th><th>mg/mL</th><th>Stamp</th><th class="num">Stock</th><th class="num">Cost</th><th class="num">Price</th><th>Status</th></tr></thead><tbody>'+
+ list.map(function(p){var f=flag(p),stc=p.stamp==='ON'?'<span class="pill p-ok">Ontario</span>':p.stamp==='n/a'?'<span class="pill p-mute">n/a</span>':p.stamp==='CA'?'<span class="pill p-bad">Canada only</span>':'<span class="pill p-bad">None</span>';
+  var stat=f?'<span class="pill p-bad">'+f+'</span>':p.stock<=0?'<span class="pill p-bad">Out</span>':p.stock<=p.par?'<span class="pill p-warn">Low</span>':'<span class="pill p-ok">OK</span>';
+  return '<tr class="'+(f?'block':'')+'"><td><b style="font-size:14px">'+esc(p.brand)+'</b> '+esc(p.name)+(p.house?' <span class="pill p-hot">House</span>':'')+'<div style="font-family:var(--mono);font-size:11px;color:var(--gray)">'+p.sku+' · '+p.cat+' · '+esc(p.sup)+'</div></td><td class="num" style="text-align:left;'+(p.nic>20?'color:var(--bad);font-weight:700':'')+'">'+(p.nic||'—')+'</td><td>'+stc+'</td><td class="num">'+p.stock+(p.par?' / '+p.par:'')+'</td><td class="num">'+money(p.cost)+'</td><td class="num">'+money(p.price)+'</td><td>'+stat+'</td></tr>'}).join('')+
+ '</tbody></table></div></div><div class="pn" style="align-self:start"><div class="ph"><h3>Reorder by supplier</h3></div>'+
+ (Object.keys(po).length?Object.keys(po).map(function(s){return '<div style="border:1px solid var(--soft);border-radius:10px;padding:12px;margin-bottom:10px"><div style="font-family:var(--mono);font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.08em">'+esc(s)+'</div>'+po[s].map(function(p){return '<div style="display:flex;justify-content:space-between;gap:8px;font-size:14px;margin-top:4px"><span>'+esc(p.brand+' '+p.name)+'</span><span style="font-family:var(--mono)">× '+(p.par*2-p.stock)+'</span></div>'}).join('')+'<button class="btn sm line" type="button" data-po="'+esc(s)+'" style="margin-top:10px">Mark ordered</button></div>'}).join(''):'<p style="color:var(--gray);margin:0">All stocked.</p>')+
+ '<div style="margin-top:12px;font-size:13px;color:var(--gray);border-top:1px solid var(--soft);padding-top:10px">Blocked items go back to the supplier. Federal law caps nicotine at 20 mg/mL, and since October 2024 vaping products sold in Ontario need the Ontario excise stamp. Nicotine strengths here are placeholders until we load your real stock list.</div></div></div>';
+}
+function pWholesale(){
+ return head('Wholesale','Consultations and quotes for other retailers. Check registration before you quote.')+
+ '<div class="g g2"><div class="pn"><div class="ph"><h3>Requests</h3><span class="sample">Sample stores</span></div><div class="tw"><table class="t"><thead><tr><th>Store</th><th>Type</th><th>Asking for</th><th>Retailer check</th><th>Quote</th><th></th></tr></thead><tbody>'+
+ S.wh.map(function(w,i){return '<tr><td><b>'+esc(w.biz)+'</b><div style="font-size:12px;color:var(--gray)">'+esc(w.city)+'</div></td><td style="font-size:13px">'+esc(w.type)+'</td><td style="font-size:13px">'+esc(w.ask)+'</td><td><span class="pill '+(w.st==='Verified'?'p-ok':'p-warn')+'">'+w.st+'</span></td><td><span class="pill '+(w.quote==='Sent'?'p-ok':w.quote==='New'?'p-hot':'p-mute')+'">'+w.quote+'</span></td><td style="text-align:right;white-space:nowrap">'+(w.st!=='Verified'?'<button class="btn sm line" type="button" data-wv="'+i+'">Mark verified</button>':w.quote!=='Sent'?'<button class="btn sm" type="button" data-wq="'+i+'">Send quote</button>':'')+'</td></tr>'}).join('')+
+ '</tbody></table></div></div><div class="pn" style="align-self:start"><div class="ph"><h3>Quote builder</h3></div>'+
+ '<div class="fg"><div class="fld full"><label for="q-sku">Product</label><select id="q-sku">'+P.filter(sellable).map(function(p){return '<option value="'+p.sku+'">'+esc(p.brand+' '+p.name)+'</option>'}).join('')+'</select></div><div class="fld"><label for="q-qty">Units</label><input id="q-qty" type="number" min="1" value="50"></div><div class="fld"><label for="q-mg">Margin over cost</label><select id="q-mg"><option value="0.12">12%</option><option value="0.18" selected>18%</option><option value="0.25">25%</option></select></div></div>'+
+ '<div id="qOut" style="margin-top:14px;border-top:1.5px solid var(--ink);padding-top:10px"></div>'+
+ '<p style="font-size:12.5px;color:var(--gray);margin:10px 0 0">Costs are sample numbers. "Score or a splash": your own words from the current site, used on the quote.</p></div></div>';
+}
+function quoteCalc(){var o=$('#qOut');if(!o)return;var p=bySku($('#q-sku').value),n=+$('#q-qty').value||0,m=+$('#q-mg').value,u=p.cost*(1+m);
+ o.innerHTML='<div style="display:flex;justify-content:space-between;font-size:14px"><span>Per unit</span><b style="font-family:var(--mono)">'+money(u)+'</b></div><div style="display:flex;justify-content:space-between;font-size:14px"><span>'+n+' units</span><b style="font-family:var(--mono)">'+money(u*n)+'</b></div><div style="display:flex;justify-content:space-between;font-size:13px;color:var(--gray)"><span>vs. your retail</span><span>'+Math.round((1-u/p.price)*100)+'% under</span></div>'}
+var CHK=[['signs','Age and health warning signs at the counter'],['hidden','Nothing visible from Dunlop St through the window'],['sign','Outside sign shows the name only, no promo wording'],['stamps','All stock on the shelf has the Ontario stamp'],['bags','Delivery bags labelled 19+'],['two','Two staff on after 10 pm (Fri & Sat)'],['reg','Specialty vape store registration on file with the health unit']];
+function pCompliance(){
+ var ref=S.idlog.filter(function(x){return x.res==='Refused'}).length;
+ return head('Compliance','Your record for health unit visits. Counter and door checks in one log. ID numbers are never stored.')+
+ '<div class="g g4">'+kpi('ID checks today',String(S.idlog.length),'counter + door')+kpi('Refusals',String(ref),'logged with reason')+kpi('Checklist',(CHK.length-openTasks())+'/'+CHK.length,'done today',openTasks()?'bad':'up')+kpi('Blocked stock',String(blocked()),'pulled from sale',blocked()?'bad':'')+'</div>'+
+ '<div class="g g2" style="margin-top:16px"><div class="pn"><div class="ph"><h3>ID check &amp; refusal log</h3><span class="pill p-mute">No ID numbers stored</span></div><div class="tw"><table class="t"><thead><tr><th>Time</th><th>Where</th><th>Staff</th><th>ID type</th><th>Age</th><th>Result</th></tr></thead><tbody>'+
+ S.idlog.slice().reverse().map(function(x){return '<tr><td style="font-family:var(--mono);font-size:12.5px">'+x.t+'</td><td><span class="pill '+(x.where==='Door'?'p-cy':'p-mute')+'">'+x.where+'</span></td><td>'+esc(x.staff)+'</td><td>'+esc(x.type)+'</td><td class="num" style="text-align:left">'+(x.age==null?'—':x.age)+'</td><td><span class="pill '+(x.res==='Pass'?'p-ok':'p-bad')+'">'+x.res+'</span></td></tr>'}).join('')+
+ '</tbody></table></div></div><div class="pn" style="align-self:start"><div class="ph"><h3>Daily checklist</h3></div>'+
+ CHK.map(function(c){return '<label class="chk" for="ck-'+c[0]+'"><span>'+c[1]+'</span><input type="checkbox" id="ck-'+c[0]+'" data-ck="'+c[0]+'" '+(S.checklist[c[0]]?'checked':'')+'></label>'}).join('')+'</div></div>'+
+ '<div class="g g2" style="margin-top:16px"><div class="pn"><div class="ph"><h3>Fix before launch</h3><span class="pill p-hot">From your current pages</span></div>'+
+ '<div class="fix"><b>Website shows products with no age check</b><span>paynpuffvapes.com lists devices, photos and prices to anyone. This new site puts them behind a real ID check.</span></div>'+
+ '<div class="fix"><b>"Younginz" wording on Facebook</b><span>Reads as youth appeal. Worth taking down.</span></div>'+
+ '<div class="fix"><b>Loyalty deals (6th purchase, sticker credit)</b><span>Promotions on vape products have rules. Check with the health unit before running them.</span></div>'+
+ '<div class="fix"><b>"Luxury vape destination"</b><span>Lifestyle wording in promotion is restricted. Keep copy factual.</span></div>'+
+ '<div class="fix"><b>Logo still says "Newmarket\'s Fastest Vape Delivery"</b><span>Speed claims for vape delivery are risky, and the store is in Barrie now.</span></div>'+
+ '<div class="fix" style="margin-bottom:0"><b>Two prices for the 30K</b><span>Instagram says $35.99, the website says $45. Pick one.</span></div></div>'+
+ '<div class="pn" style="align-self:start"><h3>Website guardrails</h3><div class="ls" style="margin-top:6px"><div class="it"><span>Real ID verification before products show</span><span class="pill p-ok">On</span></div><div class="it"><span>Health warning on the shelf</span><span class="pill p-ok">On</span></div><div class="it"><span>No reviews or testimonials</span><span class="pill p-ok">On</span></div><div class="it"><span>No people, characters or flavour imagery</span><span class="pill p-ok">On</span></div><div class="it"><span>Blocked stock hidden from shop and delivery</span><span class="pill p-ok">On</span></div></div></div></div>';
+}
+function pStaff(){
+ var days=['Tue','Wed','Thu','Fri','Sat','Sun'],sh=[['Owner','12–9','12–9','12–6','12–6','12–6','12–8'],['Counter 2','—','—','6–10','6–1','6–1','—'],['Driver 1','5–9','5–9','5–10','6–1','6–1','—'],['Driver 2','—','—','—','8–1','8–1','12–8']];
+ return head('Late shifts','Two people in the store after 10 pm on Fridays and Saturdays, plus drivers.')+
+ '<div class="pn"><div class="tw"><table class="t"><thead><tr><th>Staff</th>'+days.map(function(d){return '<th>'+d+'</th>'}).join('')+'</tr></thead><tbody>'+sh.map(function(r){return '<tr><td><b>'+r[0]+'</b></td>'+r.slice(1).map(function(x){return '<td style="font-family:var(--mono);font-size:12.5px;'+(x==='—'?'color:var(--gray)':/1$/.test(x)?'color:var(--hot);font-weight:500':'')+'">'+x+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div><p style="margin:12px 0 0"><span class="sample">Sample schedule</span> <span style="font-size:13px;color:var(--gray)">Monday closed until you confirm.</span></p></div>'+
+ '<div class="g g3" style="margin-top:16px"><div class="pn"><h3>Friday coverage</h3><div class="hb"><span>12 – 6 pm</span><span class="tr"><i style="width:50%;background:var(--ok)"></i></span><span class="n">1 on</span></div><div class="hb"><span>6 – 10 pm</span><span class="tr"><i style="width:100%;background:var(--ok)"></i></span><span class="n">2 on</span></div><div class="hb"><span>10 pm – 1 am</span><span class="tr"><i style="width:100%;background:var(--ok)"></i></span><span class="n">2 + 2</span></div></div>'+
+ '<div class="pn"><h3>Training</h3><div class="ls" style="margin-top:6px"><div class="it"><span>Owner<small>Retailer training</small></span><span class="pill p-ok">Current</span></div><div class="it"><span>Counter 2<small>ID checks &amp; refusals</small></span><span class="pill p-ok">Current</span></div><div class="it"><span>Drivers<small>Door ID checks</small></span><span class="pill p-warn">Driver 2 due</span></div></div></div>'+
+ '<div class="pn"><h3>Closing</h3><div class="ls" style="margin-top:6px"><div class="it"><span>Cash count, two people<small>After 1 am close</small></span></div><div class="it"><span>All flights landed or returned<small>Before lock-up</small></span></div><div class="it"><span>Returned orders back on the shelf</span></div></div></div></div>';
+}
+function pReports(){
+ var hrs=[['12–3 pm',14],['3–6 pm',20],['6–9 pm',30],['9 pm–12 am',26],['12–1 am',10]];
+ var w=[2810,3120,3390,3540,3700,3980,4150,4420],W=620,H=220,pd=40,mx=5000,bw=(W-pd-8)/w.length;
+ var grid=[0,2500,5000].map(function(v){var y=H-24-v/mx*(H-40);return '<line x1="'+pd+'" x2="'+(W-4)+'" y1="'+y+'" y2="'+y+'" stroke="#e3e0ea"/><text x="'+(pd-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="11" fill="#5f5a6e" font-family="DM Mono,monospace">'+(v?'$'+v/1000+'k':'0')+'</text>'}).join('');
+ var bars=w.map(function(v,i){var x=pd+8+i*bw,h=v/mx*(H-40),last=i===w.length-1;return '<rect x="'+x+'" y="'+(H-24-h)+'" width="'+(bw-14)+'" height="'+h+'" fill="'+(last?'#e8429f':'#2d2142')+'" rx="3"/>'+(last?'<text x="'+(x+(bw-14)/2)+'" y="'+(H-30-h)+'" text-anchor="middle" font-size="11.5" font-weight="500" fill="#231a33" font-family="DM Mono,monospace">$'+(v/1000).toFixed(1)+'k</text>':'')+'<text x="'+(x+(bw-14)/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="10" fill="#5f5a6e" font-family="DM Mono,monospace">W'+(i+1)+'</text>'}).join('');
+ return head('Reports','Since opening, plus an audit export for health unit visits.','<button class="btn sm line" type="button" id="exp">Export compliance log</button>')+
+ '<div class="g g4">'+kpi('Sales · 8 weeks','$29,110','sample','')+kpi('Delivery share','34%','of orders')+kpi('Door refusals','2.1%','of deliveries')+kpi('House brand','22%','of disposable sales','up')+'</div>'+
+ '<div class="g g2" style="margin-top:16px"><div class="pn"><div class="ph"><h3>Weekly sales</h3><span class="sample">Sample figures</span></div><svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block" role="img" aria-label="Weekly sales for 8 weeks rising from about 2.8 to 4.4 thousand dollars">'+grid+bars+'</svg></div>'+
+ '<div class="pn"><div class="ph"><h3>Fri &amp; Sat, by hour</h3></div>'+hrs.map(function(c){return '<div class="hb"><span>'+c[0]+'</span><span class="tr"><i style="width:'+c[1]/30*100+'%;'+(/am/.test(c[0])&&c[0].indexOf('12–1')===0?'background:var(--hot)':'')+'"></i></span><span class="n">'+c[1]+'%</span></div>'}).join('')+'<p style="font-size:12.5px;color:var(--gray);margin:10px 0 0">Shows whether staying open till 1 am pays for the extra shift.</p></div></div>';
+}
+var R={today:pToday,checkout:pCheckout,flights:pFlights,inventory:pInventory,wholesale:pWholesale,compliance:pCompliance,staff:pStaff,reports:pReports};
+function after(){if(page==='wholesale')quoteCalc()}
+function draw(){nav();$('#am').innerHTML=R[page]();after();window.scrollTo(0,0)}
+function re(){var y=window.scrollY;nav();$('#am').innerHTML=R[page]();after();window.scrollTo(0,y)}
+
+$('#am').addEventListener('click',function(e){
+ var t=e.target.closest('button');if(!t)return;
+ if(t.dataset.add){var p=bySku(t.dataset.add);if(cart.filter(function(x){return x.sku===p.sku}).length>=p.stock){toast('Only '+p.stock+' on hand');return}cart.push({sku:p.sku,name:p.brand+' '+p.name,price:p.price});re();return}
+ if(t.dataset.rm!=null){cart.splice(+t.dataset.rm,1);re();return}
+ if(t.id==='id25'){idState={ok:true,label:'Customer clearly 25+ · no ID needed'};re();return}
+ if(t.id==='idReset'){idState=null;re();return}
+ if(t.id==='idCheck'){var v=$('#idDob').value,ty=$('#idType').value;if(!v){toast('Enter the date of birth from the ID');return}var age=ageOf(v);
+   if(age>=19){idState={ok:true,label:ty+' checked · age '+age};S.idlog.push({t:nowT(),staff:'Owner',where:'Counter',res:'Pass',type:ty,age:age});toast('ID OK · age '+age)}
+   else{S.idlog.push({t:nowT(),staff:'Owner',where:'Counter',res:'Refused',type:ty,age:age});cart=[];idState=null;toast('Under 19. Sale refused and logged.')}
+   re();return}
+ if(t.id==='idRefuse'){S.idlog.push({t:nowT(),staff:'Owner',where:'Counter',res:'Refused',type:'No ID',age:null});cart=[];idState=null;re();toast('Refusal logged');return}
+ if(t.dataset.pay){var tot=cart.reduce(function(s,x){return s+x.price},0);cart.forEach(function(x){var p=bySku(x.sku);p.stock=Math.max(0,p.stock-1)});
+   S.sales.push({t:nowT(),items:cart.length,total:tot,how:t.dataset.pay,id:idState.label});toast(t.dataset.pay+' · '+money(tot)+' paid');cart=[];idState=null;re();return}
+ if(t.dataset.fly!=null){var f=S.flights[+t.dataset.fly];f.st='In flight';var d=new Date(Date.now()+25*60000);f.eta=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');re();toast(f.code+' is in flight');return}
+ if(t.dataset.land!=null){var i=+t.dataset.land,fl=S.flights[i];modal('<h3>'+fl.code+' · at the door</h3><p>Hand over only to '+esc(fl.who.replace('Verified customer · ',''))+' after checking photo ID. Never type the ID number.</p><div class="fg"><div class="fld"><label for="dr-type">ID type</label><select id="dr-type"><option>Driver\'s licence</option><option>Ontario Photo Card</option><option>Passport</option></select></div><div class="fld"><label for="dr-dob">Date of birth on ID</label><input id="dr-dob" type="date"></div><label class="fld full" style="display:flex;gap:8px;align-items:center;font-size:14px"><input type="checkbox" id="dr-name" style="width:auto"> Name on the ID matches the order</label></div><div class="bnav"><button class="btn line" type="button" data-door="fail" data-i="'+i+'" style="color:var(--bad);border-color:var(--bad)">No ID · bring it back</button><button class="btn hot" type="button" data-door="pass" data-i="'+i+'">ID checked · hand over</button></div>');return}
+ if(t.dataset.if){invF=t.dataset.if;re();return}
+ if(t.dataset.po){toast('Order sent to '+t.dataset.po);t.textContent='Ordered ✓';t.disabled=true;return}
+ if(t.id==='rcv'){modal('<h3>Receive shipment</h3><p>Every product is checked for nicotine strength and the Ontario stamp as it comes in.</p><div class="fg"><div class="fld full"><label for="rc-sku">Product</label><select id="rc-sku">'+P.map(function(p){return '<option value="'+p.sku+'">'+esc(p.brand+' '+p.name)+'</option>'}).join('')+'</select></div><div class="fld"><label for="rc-q">Quantity</label><input id="rc-q" type="number" min="1" value="10"></div></div><div class="bnav"><button class="btn line" data-close type="button">Cancel</button><button class="btn" id="rcvSave" type="button">Receive</button></div>');return}
+ if(t.dataset.wv!=null){S.wh[+t.dataset.wv].st='Verified';re();toast('Marked as a registered retailer');return}
+ if(t.dataset.wq!=null){S.wh[+t.dataset.wq].quote='Sent';re();toast('Quote sent');return}
+ if(t.id==='exp'){toast('In the live system this downloads the ID and refusal log');return}
+});
+$('#am').addEventListener('change',function(e){var t=e.target;
+ if(t.dataset.ck){S.checklist[t.dataset.ck]=t.checked;re();return}
+ if(t.dataset.drv!=null&&t.value){var f=S.flights[+t.dataset.drv];f.driver=t.value;f.st='Boarding';re();toast(f.code+' boarding with '+t.value);return}
+ if(t.id==='q-sku'||t.id==='q-mg')quoteCalc()});
+$('#am').addEventListener('input',function(e){var t=e.target;if(t.id==='q-qty'){quoteCalc();return}if(t.id==='invQ'){invQ=t.value;var p=t.selectionStart;re();var n=$('#invQ');n.focus();n.setSelectionRange(p,p)}});
+
+function route(){var h=location.hash.replace('#','');
+ if(h.indexOf('admin-')===0){page=R[h.slice(6)]?h.slice(6):'today';$('#site').hidden=true;$('#admin').hidden=false;draw()}
+ else{$('#admin').hidden=true;$('#site').hidden=false;closeM();if(h){var el=document.getElementById(h);if(el)setTimeout(function(){el.scrollIntoView({block:'start'})},0)}}}
+window.addEventListener('hashchange',route);route();
+})();
+</script>
+
+</body></html>
